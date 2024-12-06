@@ -51,6 +51,9 @@ jobs:
         git add .
         git commit -m "Automated park run update on $(date)"
         git push -u origin main
+    - name: Soundness check
+      run: |-
+        datasette . --get / | grep "parkrun"
     - name: Deploy
       env:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
