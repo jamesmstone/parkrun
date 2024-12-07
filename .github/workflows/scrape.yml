@@ -61,7 +61,7 @@ jobs:
        datasette publish vercel parkruns.db \
           --project=parkrun \
           --generate-vercel-json > vercel.json
-       sed -i 's/@vercel\/python@3\.0\.7/@vercel\/python@3.12/g' vercel.json
+       sed -i 's/@vercel\/python@3\.0\.7/@vercel\/python@4.5.1/g' vercel.json
        datasette publish vercel parkruns.db \
           --token $VERCEL_TOKEN \
           --project parkrun \
