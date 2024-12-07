@@ -59,7 +59,12 @@ jobs:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       run: |
        datasette publish vercel parkruns.db \
+          --project=parkrun \
+          --generate-vercel-json > vercel.json
+       sed -i 's/@vercel\/python@3\.0\.7/@vercel\/python@3.12/g' vercel.json
+       datasette publish vercel parkruns.db \
           --token $VERCEL_TOKEN \
-          --project parkrun
+          --project parkrun \
+          --vercel-json=vercel.json
 
 
