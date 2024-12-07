@@ -60,11 +60,9 @@ jobs:
       run: |
        datasette publish vercel parkruns.db \
           --project=parkrun \
-          --generate-vercel-json > vercel.json || {  echo "error with vercel json"  ; exit 2 }
-       sed -i 's/@vercel\/python@3\.0\.7/@vercel\/python@4.5.1/g' vercel.json || {  echo "error with sed"  ; exit 3 }
+          --generate-vercel-json > vercel.json
+       sed -i 's/@vercel\/python@3\.0\.7/@vercel\/python@4.5.1/g' vercel.json
        datasette publish vercel parkruns.db \
           --token $VERCEL_TOKEN \
           --project parkrun \
-          --vercel-json=vercel.json || {  echo "error with vercel publish"  ; exit 3 }
-
-
+          --vercel-json=vercel.json
