@@ -15,12 +15,12 @@ buildPythonApplication rec {
     hash = "sha256-J750+5oiVa+rquqg1AbGOWB9aChOmEnwfJiffXHrHDA=";
   };
 
-  build-system = [setuptools];
+  build-system = [ setuptools ];
 
   # The sdist ships the test module but not the results.html fixture it reads.
   doCheck = false;
 
-  pythonImportsCheck = ["parkrun_to_sqlite"];
+  pythonImportsCheck = [ "parkrun_to_sqlite" ];
 
   meta = {
     description = "Create a SQLite database containing your parkruns";
