@@ -35,8 +35,5 @@ jobs:
           git push origin HEAD:main
 
       - name: Publish database
-        # Rename rather than write in place: Datasette holds the database open,
-        # and install(1) truncates, so a reader can see a torn file mid-write.
-        run: |-
-          install -Dm644 parkruns.db /var/lib/datasette-sites/parkrun/.parkruns.db.new
-          mv -f /var/lib/datasette-sites/parkrun/.parkruns.db.new /var/lib/datasette-sites/parkrun/parkruns.db
+        # publish-db is a runner command whose destination is services.dbs.
+        run: publish-db parkrun parkruns.db

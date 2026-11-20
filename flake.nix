@@ -14,7 +14,7 @@
     in
     {
       # `packages.<system>.default` is the scraper CLI, not a site: it writes
-      # parkruns.db, which Datasette is pointed at separately.
+      # parkruns.db, which the workflow publishes with `publish-db`.
       packages = eachSystem (system: {
         default = inputs.self.packages.${system}.parkrun-to-sqlite;
         parkrun-to-sqlite = pkgsFor.${system}.python3Packages.callPackage ./parkrun-to-sqlite.nix { };
