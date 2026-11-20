@@ -13,8 +13,6 @@
       pkgsFor = eachSystem (system: inputs.nixpkgs.legacyPackages.${system});
     in
     {
-      # `packages.<system>.default` is the scraper CLI; the module runs it and
-      # installs parkruns.db at its `publish` path.
       packages = eachSystem (system: {
         default = inputs.self.packages.${system}.parkrun-to-sqlite;
         parkrun-to-sqlite = pkgsFor.${system}.python3Packages.callPackage ./parkrun-to-sqlite.nix { };
@@ -31,8 +29,6 @@
           build = inputs.self.packages.${system}.default;
         }
         // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-          # The real unit with the network CLI stubbed: the database must land
-          # at `publish`, and an empty scrape must leave the previous one alone.
           scraper = pkgs.testers.runNixOSTest {
             name = "parkrun-scraper";
 

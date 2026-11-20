@@ -14,7 +14,6 @@ let
     tmp=$(mktemp -d)
     trap 'rm -rf "$tmp"' EXIT
     ${lib.getExe cfg.tool} ${lib.escapeShellArg cfg.athlete} "$tmp/parkruns.db"
-    # A scrape that came back empty must not replace the last good database.
     [ "$(sqlite3 "$tmp/parkruns.db" 'select count(*) from runs')" -gt 0 ]
     # Renamed into place: readers may hold the old file open, and writing in
     # place would show them a torn one.
